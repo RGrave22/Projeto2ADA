@@ -21,9 +21,12 @@ public class Main {
         for (int i = 0; i<nLasers; i++) {
             String[] node = in.readLine().split(" ");
             Node nodeObj = new Node(Integer.parseInt(node[0]), Integer.parseInt(node[1]));
+            nodes.add(nodeObj);
         }
 
         CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
+        cre.createGraph();
+        System.out.println(cre.solve());
 
 
     }

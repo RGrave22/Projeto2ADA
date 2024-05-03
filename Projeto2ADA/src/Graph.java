@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Graph {
-    private HashMap<Node, List<Node>> graph;
+    private final HashMap<Node, List<Node>> graph;
 
 
     public Graph(int numLasers) {

@@ -19,8 +19,11 @@ public class CanRobEscape {
         this.diameter = diameter;
         this.nLasers = nLasers;
         this.nodes = nodes;
-        Graph graph = new Graph(nLasers);
+        graph = new Graph(nLasers);
 
+    }
+
+    public void createGraph() {
         nodes.sort(Comparator.comparing(Node::getX));
 
         for(int i = 0; i < nodes.size()-1; i++){
@@ -32,34 +35,46 @@ public class CanRobEscape {
         graph.addNode(nodes.getLast());
     }
 
+    public boolean solve() {
+        return dfsExplore(graph, nodes.get(0));
+    }
 
-    boolean dfsExplore( Graph graph, Node root ) {
 
+    //Se o próximo ponto esta por cima, se passar pelo meio TOP, se não ou passa por baixo do a baixo ou por cima do a cima
+    //Se o próximo ponto esta por baixo, se passar pelo meio temos de verificar se o ponto a baixo tem espaço por cima,
+    // se não passa pelo meio ou passa por cima ou por baixo ou não passa
+    //
+    public boolean dfsExplore( Graph graph, Node root ) {
 
         Stack<Node> adjacent = new Stack<>();
         adjacent.push(root);
+        boolean isTop = false;
         do {
 
             Node node = adjacent.pop();
             for(Node adjacentNode: graph.adjacentNodes(node)) {
-
+                if(isHigher(adjacentNode, node)) {
+                    if(distance(node,adjacentNode) < diameter){
+                        if(topDistance(adjacentNode) < diameter && bottomDistance(node) < diameter)
+                            return false;
+                    }
+                }else {
+                    if(topDistance(adjacentNode) < diameter){
+                        if(topDistance(node) < diameter && bottomDistance(adjacentNode) < diameter) {
+                            return false;
+                        }
+                    }
+                }
               
 
 
             }
-
-
-
 
         }
         while (!adjacent.empty());
 
         return true;
     }
-
-
-
-
 
 
 
@@ -78,5 +93,6 @@ public class CanRobEscape {
     private int bottomDistance(Node node) {
         return node.getY();
     }
+
 
 }
