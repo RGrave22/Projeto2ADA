@@ -1,7 +1,5 @@
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+
 
 public class CanRobEscape {
 
@@ -13,6 +11,13 @@ public class CanRobEscape {
     private List<Node> nodes;
     private Graph graph;
 
+//    private UnionFind partition;
+
+    private HashMap<Node,Integer> graph1;
+
+
+
+
     public CanRobEscape(int length, int width, int diameter, int nLasers, List<Node> nodes){
         this.length = length;
         this.width = width;
@@ -20,11 +25,12 @@ public class CanRobEscape {
         this.nLasers = nLasers;
         this.nodes = nodes;
         graph = new Graph(nLasers);
+//        partition = new UnionFindInArray(nodes.size());
 
     }
 
     public void createGraph() {
-        nodes.sort(Comparator.comparing(Node::getX));
+//        nodes.sort(Comparator.comparing(Node::getX));
 
         for(int i = 0; i < nodes.size()-1; i++){
             Node node = nodes.get(i);
@@ -32,10 +38,40 @@ public class CanRobEscape {
             graph.addAdjacentNode(node, nodes.get(i+1));
         }
 
-        graph.addNode(nodes.getLast());
+        graph.addNode(nodes.get(nodes.size()-1));
     }
 
-    public boolean solve() {
+//    public void initialPartition() {
+//        for (Node node: nodes) {
+//            int id = graph1.get(node);
+//            partition.find(id);
+//            graph1.put(node,id);
+//        }
+//    }
+
+//    public void createPartitions() {
+//        for(Node node: nodes){
+//            for(Node nodeToJoin: nodes) {
+//                if(!areTheSame(node,nodeToJoin)){
+//                    if(distance(node,nodeToJoin) < diameter) {
+//        int n1 = partition.find(graph1.get(node));
+//        int n2 = partition.find(graph1.get(nodeToJoin));
+//        partition.union(n1,n2);
+//    }
+//    }
+//}
+//        }
+//                }
+
+//    public boolean solution(){
+//
+//    }
+
+
+
+
+
+public boolean solve() {
         return dfsExplore(graph, nodes.get(0));
     }
 
@@ -48,26 +84,29 @@ public class CanRobEscape {
 
         Stack<Node> adjacent = new Stack<>();
         adjacent.push(root);
-        boolean isTop = false;
+
         do {
 
             Node node = adjacent.pop();
+            if(topDistance(node) < diameter && bottomDistance(node) < diameter && nodes.size()==1)
+                return false;
+
             for(Node adjacentNode: graph.adjacentNodes(node)) {
                 if(isHigher(adjacentNode, node)) {
                     if(distance(node,adjacentNode) < diameter){
-                        if(topDistance(adjacentNode) < diameter && bottomDistance(node) < diameter)
+                        if(topDistance(adjacentNode) < diameter && bottomDistance(node) < diameter) {
                             return false;
+                        }
                     }
                 }else {
-                    if(topDistance(adjacentNode) < diameter){
+                    if(topDistance(node) < diameter){
                         if(topDistance(node) < diameter && bottomDistance(adjacentNode) < diameter) {
                             return false;
                         }
                     }
                 }
-              
-
-
+                //   System.out.println(adjacentNode.getX()+ " " + adjacentNode.getY());
+                adjacent.push(adjacentNode);
             }
 
         }
@@ -76,10 +115,12 @@ public class CanRobEscape {
         return true;
     }
 
-
+    private boolean areTheSame(Node node1, Node node2) {
+        return node1.getX() == node2.getX() && node1.getY() == node2.getY();
+    }
 
     private boolean isHigher(Node node1, Node node2) {
-        return node1.getY() > node2.getY();
+        return node1.getY() >= node2.getY();
     }
 
     private int distance(Node node1, Node node2){

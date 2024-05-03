@@ -56,6 +56,20 @@ public class UnionFindInArray implements UnionFind {
         return this.findPathCompr(element);
     }
 
+    // Returns the representative of the set that contains
+    // the specified element.
+    //
+    // Without side effects - Iterative.
+//    public int find( int element ) throws InvalidElementException {
+//        if ( !this.isInTheDomain(element) )
+//            throw new InvalidElementException(validRangeMsg);
+//
+//        int node = element;
+//        while ( partition[node] >= 0 )
+//            node = partition[node];
+//        return node;
+//    }
+
 
     // Pre-condition: 0 <= element < partition.length.
     protected int findPathCompr( int element ) {

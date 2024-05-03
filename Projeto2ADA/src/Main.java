@@ -26,8 +26,12 @@ public class Main {
 
         CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
         cre.createGraph();
-        System.out.println(cre.solve());
-
+        //System.out.println(cre.solve());
+        if(cre.solve()){
+            System.out.println("Rob manages to escape!");
+        }else{
+            System.out.println("Impossible to escape");
+        }
 
     }
 }
