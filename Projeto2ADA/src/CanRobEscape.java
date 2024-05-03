@@ -90,6 +90,8 @@ public boolean solve() {
             Node node = adjacent.pop();
             if(topDistance(node) < diameter && bottomDistance(node) < diameter && nodes.size()==1)
                 return false;
+            else if(topDistance(node) >= diameter && bottomDistance(node) >= diameter && nodes.size()==1)
+                return true;
 
             for(Node adjacentNode: graph.adjacentNodes(node)) {
                 if(isHigher(adjacentNode, node)) {
