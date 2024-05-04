@@ -24,10 +24,14 @@ public class Main {
             nodes.add(nodeObj);
         }
 
+
+
         CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
-        cre.createGraph();
+        cre.initialPartition();
+        cre.createPartitions();
+//        cre.createGraph();
         //System.out.println(cre.solve());
-        if(cre.solve()){
+        if(cre.solution()){
             System.out.println("Rob manages to escape!");
         }else{
             System.out.println("Impossible to escape");

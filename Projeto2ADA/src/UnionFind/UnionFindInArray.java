@@ -1,5 +1,7 @@
 package UnionFind;
 
+import java.util.Arrays;
+
 public class UnionFindInArray implements UnionFind {
 
     static final long serialVersionUID = 0L;
@@ -107,6 +109,11 @@ public class UnionFindInArray implements UnionFind {
         else
             // Height(S1) < Height(S2).
             partition[rep1] = rep2;
+    }
+
+
+    public void print() {
+        System.out.println(Arrays.toString(partition));
     }
 
 

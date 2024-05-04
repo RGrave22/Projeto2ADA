@@ -18,4 +18,5 @@ public interface UnionFind extends Serializable {
             InvalidElementException, NotRepresentativeException,
             EqualSetsException;
 
+    void print();
 }
