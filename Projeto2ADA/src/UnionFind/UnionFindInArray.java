@@ -6,7 +6,6 @@ public class UnionFindInArray implements UnionFind {
 
     static final long serialVersionUID = 0L;
 
-
     // The partition is a forest implemented in an array.
     protected int[] partition;
 
@@ -72,7 +71,6 @@ public class UnionFindInArray implements UnionFind {
 //        return node;
 //    }
 
-
     // Pre-condition: 0 <= element < partition.length.
     protected int findPathCompr( int element ) {
         if ( partition[element] < 0 )
@@ -82,7 +80,6 @@ public class UnionFindInArray implements UnionFind {
         partition[element] = root;
         return root;
     }
-
 
     // Removes the two distinct sets S1 and S2 whose representatives are
     // the specified elements, and inserts the set S1 U S2.
@@ -111,12 +108,9 @@ public class UnionFindInArray implements UnionFind {
             partition[rep1] = rep2;
     }
 
-
     public void print() {
         System.out.println(Arrays.toString(partition));
     }
-
-
 }
 
 

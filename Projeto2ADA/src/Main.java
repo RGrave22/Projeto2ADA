@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,12 +26,9 @@ public class Main {
         }
 
 
-
         CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
-        cre.initialPartition();
         cre.createPartitions();
-//        cre.createGraph();
-        //System.out.println(cre.solve());
+
         if(cre.solution()){
             System.out.println("Rob manages to escape!");
         }else{
