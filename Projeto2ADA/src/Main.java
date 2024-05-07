@@ -25,7 +25,6 @@ public class Main {
             nodes.add(nodeObj);
         }
 
-
         CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
         cre.createPartitions();
 
