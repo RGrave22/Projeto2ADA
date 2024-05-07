@@ -1,6 +1,9 @@
-import java.util.*;
+
 
 import UnionFind.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CanRobEscape {
@@ -40,10 +43,9 @@ public class CanRobEscape {
     public boolean solution(){
         List<Integer> partitionsRoots = new ArrayList<>();
 
-
         for(int i = 0; i < nLasers; i++) {
             int root = partition.find(i);
-            if(!partitionsRoots.contains(root)){
+            if (!partitionsRoots.contains(root)) {
                 partitionsRoots.add(root);
             }
         }
@@ -55,11 +57,14 @@ public class CanRobEscape {
                 int rootId = partition.find(i);
                 if(rootId == root){
                     Node node = nodes.get(i);
-                    if(topDistance(node) < top){
-                        top = topDistance(node);
+                    int top_distance = topDistance(node);
+                    int bottom_distance = bottomDistance(node);
+
+                    if(top_distance < top){
+                        top = top_distance;
                     }
-                    if(bottomDistance(node) < bot){
-                        bot = bottomDistance(node);
+                    if(bottom_distance < bot){
+                        bot = bottom_distance;
                     }
                 }
             }
