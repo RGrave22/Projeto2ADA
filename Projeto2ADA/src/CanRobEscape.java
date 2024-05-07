@@ -86,7 +86,6 @@ public class CanRobEscape {
             }
         }
 
-
 //        for(int root: partitionsRoots ){
 //            int top = Integer.MAX_VALUE;
 //            int bot = Integer.MAX_VALUE;
