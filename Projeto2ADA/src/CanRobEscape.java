@@ -12,39 +12,34 @@ public class CanRobEscape {
     private List<Node> nodes;
     private UnionFind partition;
 
-
-    public CanRobEscape(int length, int width, int diameter, int nLasers, List<Node> nodes){
+    public CanRobEscape(int length, int width, int diameter, int nLasers){
         this.length = length;
         this.width = width;
         this.diameter = diameter;
         this.nLasers = nLasers;
-        this.nodes = nodes;
-        partition = new UnionFindInArray(nLasers);
+        this.nodes = new ArrayList<>();
+        this.partition = new UnionFindInArray(nLasers);
     }
 
-    public void createPartitions() {
+    public void addNode(Node node) {
+        int id = 0;
 
-        for(int i = 0; i < nLasers; i++) {
-            // System.out.println("->" + nodes.indexOf(node));
-            for (int j = 0; j < nLasers; j++) {
-                // System.out.println(nodes.indexOf(nodeToJoin));
-                if (i != j) {
-                    // System.out.println("DISTANCE:"+distance(node,nodeToJoin));
-                    if (distance(nodes.get(i), nodes.get(j)) < diameter) {
-                        int n1 = partition.find(i);
-                        int n2 = partition.find(j);
-                        if (n1 != n2) {
-                            partition.union(n1, n2);
-                            // System.out.println("UNION: " + n1 + " " + n2);
-                        }
-                    }
+        for(Node n : this.nodes) {
+            if (distance(n, node) < diameter) {
+                int n1 = partition.find(id);
+                int n2 = partition.find(nodes.size());
+                if (n1 != n2) {
+                    partition.union(n1, n2);
                 }
             }
+            id++;
         }
+        this.nodes.add(node);
     }
 
     public boolean solution(){
         List<Integer> partitionsRoots = new ArrayList<>();
+
 
         for(int i = 0; i < nLasers; i++) {
             int root = partition.find(i);

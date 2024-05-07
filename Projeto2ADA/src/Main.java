@@ -2,8 +2,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -17,16 +15,13 @@ public class Main {
 
         int nLasers = Integer.parseInt(in.readLine());
 
-        List<Node> nodes = new ArrayList<>(nLasers);
+        CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers);
 
-        for (int i = 0; i<nLasers; i++) {
-            String[] node = in.readLine().split(" ");
-            Node nodeObj = new Node(Integer.parseInt(node[0]), Integer.parseInt(node[1]));
-            nodes.add(nodeObj);
+        for(int i = 0; i < nLasers; i++) {
+            String[] line = in.readLine().split(" ");
+            Node node = new Node(Integer.parseInt(line[0]), Integer.parseInt(line[1]));
+            cre.addNode(node);
         }
-
-        CanRobEscape cre = new CanRobEscape(length,width,diameter,nLasers,nodes);
-        cre.createPartitions();
 
         if(cre.solution()){
             System.out.println("Rob manages to escape!");
