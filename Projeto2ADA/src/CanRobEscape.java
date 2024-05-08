@@ -55,6 +55,7 @@ public class CanRobEscape {
             int bot = Integer.MAX_VALUE;
             for(int i = 0; i < nLasers; i++) {
                 int rootId = partition.find(i);
+
                 if(rootId == root){
                     Node node = nodes.get(i);
                     int top_distance = topDistance(node);
