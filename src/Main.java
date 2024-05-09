@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +20,7 @@ public class Main {
 
         for(int i = 0; i < nLasers; i++) {
             String[] line = in.readLine().split(" ");
-            Node node = new Node(Integer.parseInt(line[0]), Integer.parseInt(line[1]));
+            Point node = new Point(Integer.parseInt(line[0]),Integer.parseInt(line[1]));
             cre.addNode(node);
         }
 
